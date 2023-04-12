@@ -7,10 +7,7 @@ import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.service.UserServiceImp;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @SpringBootApplication
 public class SpringBootSecurityDemoApplication implements CommandLineRunner {
@@ -27,13 +24,14 @@ public class SpringBootSecurityDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List<User> allUsers = userServiceImp.getAllUsers();
+		List <User> allUsers = userServiceImp.getAllUsers();
 
 		if (allUsers.isEmpty()) {
 			Role role = new Role("ROLE_ADMIN");
-			HashSet<Role> roles = new HashSet<>();
-			roles.add(role);
-			userServiceImp.saveUser(new User("admin", "admin", 18, "admin@admin", "admin", roles));
+//			HashSet<Role> roles = new HashSet<>();
+			ArrayList<Role> rolesFirst = new ArrayList<>();
+			rolesFirst.add(role);
+			userServiceImp.saveUser(new User("admin", "admin", 18, "admin@admin.com", "admin", rolesFirst));
 		}
 	}
 }

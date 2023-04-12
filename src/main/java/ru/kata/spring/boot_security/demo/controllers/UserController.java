@@ -13,8 +13,7 @@ public class UserController {
 
    @GetMapping
    public String userPage(Model model, Authentication authentication) {
-      User user = (User) authentication.getPrincipal();
-      model.addAttribute("user", user);
-      return "user";
+      model.addAttribute("user",authentication.getPrincipal());
+      return "userPage";
    }
 }

@@ -2,14 +2,13 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.Normalized;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -21,25 +20,26 @@ public class User implements UserDetails {
     private long id;
 
     @Column(name = "username")
-    @NotBlank(message = "FirstName should not be empty")
-    @Size(min = 1, max = 30, message = "FirstName should be from 1 to 30 characters")
+//    @NotBlank(message = "FirstName should not be empty")
+//    @Size(min = 1, max = 30, message = "FirstName should be from 1 to 30 characters")
     private String username;
 
     @Column(name = "lastName")
-    @NotBlank(message = "LastName should not be empty")
-    @Size(min = 1, max = 30, message = "LastName should be from 1 to 30 characters")
+//    @NotBlank(message = "LastName should not be empty")
+//    @Size(min = 1, max = 30, message = "LastName should be from 1 to 30 characters")
     private String lastName;
 
     @Column(name = "age")
-    @Min(value = 0, message = "User's Age should be more than 0!")
+//    @Min(value = 0, message = "User's Age should be more than 0!")
     private int age;
 
     @Column(name = "email")
-    @Email(message = "Email is wrong")
+//    @Email
+//    @NotBlank
     private String email;
 
     @Column(name = "password")
-    @NotBlank(message = "Password should not be empty")
+//    @NotBlank(message = "Password should not be empty")
     private String password;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
@@ -47,12 +47,17 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+
+private List<Role> roles = new ArrayList<>(){
+        {
+            add(new Role());
+        }
+    };
 
     public User() {
     }
 
-    public User(String username, String lastName, int age, String email, String password, Set<Role> roles) {
+    public User(String username, String lastName, int age, String email, String password, List <Role> roles) {
         this.username = username;
         this.lastName = lastName;
         this.age = age;
@@ -102,11 +107,11 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
