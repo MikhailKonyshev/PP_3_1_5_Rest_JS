@@ -179,7 +179,7 @@
                                                                         id="rolesEdit" th:size="${#sets.size(allRoles)}"
                                                                         required>
                                                                     <option th:each="role : ${allRoles}"
-                                                                            th:value="${role.id}"
+                                                                            th:value="${role.role}"
                                                                             th:text="${role.toString()}"
                                                                             th:selected="${#lists.contains(user.roles, role)}"></option>
                                                                 </select>
@@ -335,7 +335,7 @@
                                                         id="rolesNew" th:size="${#sets.size(allRoles)}"
                                                         required>
                                                     <option th:each="role : ${allRoles}"
-                                                            th:value="${role.id}"
+                                                            th:value="${role.role}"
                                                             th:text="${role.toString()}"
                                                             th:selected="${#lists.contains(user.roles, role)}"></option>
                                                 </select>
