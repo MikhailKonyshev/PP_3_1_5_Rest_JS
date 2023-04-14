@@ -24,16 +24,15 @@ public class SpringBootSecurityDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		List <User> allUsers = userDAOServiceImp.getAllUsers();
+		List<User> allUsers = userDAOServiceImp.getAllUsers();
 
 		if (allUsers.isEmpty()) {
 			Role admin = new Role("ROLE_ADMIN");
 			Role user = new Role("ROLE_USER");
-//			HashSet<Role> roles = new HashSet<>();
-			ArrayList<Role> rolesFirst = new ArrayList<>();
-			rolesFirst.add(admin);
-			rolesFirst.add(user);
-			userDAOServiceImp.saveUser(new User("admin", "admin", 18, "admin@admin.com", "admin", rolesFirst));
+			HashSet<Role> roles = new HashSet<>();
+			roles.add(admin);
+			roles.add(user);
+			userDAOServiceImp.saveUser(new User("admin", "admin", 18, "admin@admin.com", "admin", roles));
 		}
 	}
 }

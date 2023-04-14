@@ -18,12 +18,12 @@ public class UserDetailsServiceImp implements UserDetailsService {
         this.userDAO = userDAO;
     }
 
-@Override
-public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    Optional<User> user = Optional.ofNullable(userDAO.getUserByEmail(email));
-    if (user.isEmpty()) {
-        throw new UsernameNotFoundException("User not found!");
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = Optional.ofNullable(userDAO.getUserByEmail(email));
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found!");
+        }
+        return user.get();
     }
-    return user.get();
-}
 }

@@ -5,17 +5,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.DAO.RoleDAO;
 import ru.kata.spring.boot_security.demo.DAO.UserDAO;
-import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
-public class UserDAOServiceImp implements UserDAOService{
+public class UserDAOServiceImp implements UserDAOService {
 
-    private  final UserDAO userDAO;
+    private final UserDAO userDAO;
     private final RoleDAO roleDAO;
     private final PasswordEncoder passwordEncoder;
 
@@ -28,7 +26,7 @@ public class UserDAOServiceImp implements UserDAOService{
     @Override
     public void updateUser(Long id, User user) {
         String password = user.getPassword();
-        if (password.isEmpty()){
+        if (password.isEmpty()) {
             String passwordOne = userDAO.getUserById(id).getPassword();
             user.setPassword(passwordOne);
         } else {

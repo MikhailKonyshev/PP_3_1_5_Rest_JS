@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class UserDAOImp implements UserDAO{
+public class UserDAOImp implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
