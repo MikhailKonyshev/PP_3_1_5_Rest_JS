@@ -35,6 +35,7 @@ public class UserDAOServiceImp implements UserDAOService {
         userDAO.updateUser(id, user);
     }
 
+
     @Override
     public void deleteUser(Long id) {
         userDAO.deleteUser(id);
@@ -42,7 +43,6 @@ public class UserDAOServiceImp implements UserDAOService {
 
     @Override
     public void saveUser(User user) {
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDAO.saveUser(user);
     }

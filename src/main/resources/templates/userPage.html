@@ -11,11 +11,11 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-dark sticky-top bg-dark" th:object="${user}">
+    <nav class="navbar navbar-dark sticky-top bg-dark">
     <span class="navbar-brand">
-        <strong><a th:text="${user.getEmail}"></a></strong>
-        <span class="text-start">with roles:
-            <a th:each="role : ${user.getAuthorities()}" th:text="${role} + ' '"></a>
+        <strong> <a id="authenticationEmail"></a></strong>
+        <span class="text-start">
+            <a id="authenticationRoles"></a>
         </span>
     </span>
         <ul class="navbar-nav px-3">
@@ -61,19 +61,8 @@
                                         <th>Role</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td th:text="${user.getId()}">
-                                        <td th:text="${user.getUsername}">
-                                        <td th:text="${user.getLastName()}">
-                                        <td th:text="${user.getAge()}">
-                                        <td th:text="${user.getEmail()}">
-                                        <td>
-                                            <a th:each="role : ${user.getRoles()}">
-                                                <span th:text="${role.toString()}"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <tbody id="tbodyUser">
+
                                     </tbody>
                                 </table>
                             </div>
@@ -91,6 +80,9 @@
 
     </div>
 </div>
+
+
+<script src="/static/user.js" th:src="@{/user.js}" type="text/javascript"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
