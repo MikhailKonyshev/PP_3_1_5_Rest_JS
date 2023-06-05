@@ -81,7 +81,7 @@ async function getUser(id) {
 
 async function getAllRoles(selectRole) {
 
-    const data = await fetch("http://localhost:8080/admin/users/roles");
+    const data = await fetch("http://localhost:8080/admin/roles");
     const roles = await data.json();
     let temp = "";
     await roles.forEach(role =>
