@@ -1,8 +1,8 @@
-const urlLogin = 'http://localhost:8080/user/principal';
+const urlLoginUser = 'http://localhost:8080/admin/users/principal';
 
 async function getHeader() {
     try {
-        const data = await fetch(urlLogin);
+        const data = await fetch(urlLoginUser);
         const authenticationUser = await data.json();
         const authenticationEmail = document.getElementById('authenticationEmail');
         const authenticationRoles = document.getElementById('authenticationRoles');
@@ -15,7 +15,7 @@ async function getHeader() {
 
 async function getUserTable() {
     try {
-        const data = await fetch(urlLogin);
+        const data = await fetch(urlLoginUser);
         const user = await data.json();
         const table = document.getElementById("tbodyUser");
         let dataHtml = '';

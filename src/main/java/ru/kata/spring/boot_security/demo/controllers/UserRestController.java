@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.controllers;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,27 +18,22 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class UserRestController {
     private final UserDAOServiceImp userDAOServiceImp;
     private final RoleDAOService roleDAOService;
 
-    public AdminController(UserDAOServiceImp userDAOServiceImp, RoleDAOService roleDAOService) {
+    public UserRestController(UserDAOServiceImp userDAOServiceImp, RoleDAOService roleDAOService) {
         this.userDAOServiceImp = userDAOServiceImp;
         this.roleDAOService = roleDAOService;
     }
 
-    @GetMapping()
-    public String adminPage() {
-        return "adminPage";
-    }
-
-    @GetMapping("/Rest")
+    @GetMapping("/users")
     @ResponseBody
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userDAOServiceImp.getAllUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/principal")
+    @GetMapping("/users/principal")
     @ResponseBody
     public ResponseEntity<User> getPrincipal(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
@@ -61,7 +55,7 @@ public class AdminController {
     }
 
 
-    @PatchMapping(value = "/edit/{id}")
+    @PutMapping(value = "/users/{id}")
     public ResponseEntity<HttpStatus> updateUser(@RequestBody User user, @PathVariable("id") Long id) {
         HashSet<Role> roles = new HashSet<>();
         Set<Role> selectRoles = user.getRoles();
@@ -76,7 +70,7 @@ public class AdminController {
     }
 
 
-    @PostMapping()
+    @PostMapping("/users")
     public ResponseEntity<HttpStatus> save(@RequestBody User user) {
         HashSet<Role> roles = new HashSet<>();
         Set<Role> selectRoles = user.getRoles();
@@ -91,7 +85,7 @@ public class AdminController {
     }
 
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable Long id) {
         userDAOServiceImp.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);

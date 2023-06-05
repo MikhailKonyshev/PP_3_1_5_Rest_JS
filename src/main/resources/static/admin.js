@@ -1,5 +1,5 @@
-const urlLogin = 'http://localhost:8080/admin/principal';
-const urlUsers = 'http://localhost:8080/admin/Rest';
+const urlLogin = 'http://localhost:8080/admin/users/principal';
+const urlUsers = 'http://localhost:8080/admin/users';
 
 
 async function getHeader() {
@@ -81,7 +81,7 @@ async function getUser(id) {
 
 async function getAllRoles(selectRole) {
 
-    const data = await fetch("http://localhost:8080/admin/roles");
+    const data = await fetch("http://localhost:8080/admin/users/roles");
     const roles = await data.json();
     let temp = "";
     await roles.forEach(role =>
@@ -144,8 +144,8 @@ async function editUser(event, id) {
         }
     }
 
-    await fetch("http://localhost:8080/admin/edit/" + id, {
-        method: "PATCH",
+    await fetch("http://localhost:8080/admin/users/" + id, {
+        method: "PUT",
         body: JSON.stringify({
             "id":  form.id.value,
             "username": form.username.value,
@@ -187,7 +187,7 @@ async function deleteUser(event, id) {
 
     event.preventDefault();
 
-    await fetch("http://localhost:8080/admin/delete/" + id, {
+    await fetch("http://localhost:8080/admin/users/" + id, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json'
@@ -219,7 +219,7 @@ async function newUser(event) {
         }
     }
 
-    await fetch("http://localhost:8080/admin", {
+    await fetch("http://localhost:8080/admin/users/", {
         method: "POST",
         body: JSON.stringify({
             "id":  formNewUser.id.value,
